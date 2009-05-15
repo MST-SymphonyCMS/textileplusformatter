@@ -122,7 +122,7 @@
 			);
 			
 			// Apply textile:
-			$textile = new Textile();
+			$textile = new Extension_TextPlusFormatter_Textile();
 			$source = $textile->TextileThis($source);
 			
 		    // Wrap quotation marks with a span:
