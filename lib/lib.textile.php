@@ -203,7 +203,7 @@ Applying Attributes:
 @define('txt_registered',         '&#174;');
 @define('txt_copyright',          '&#169;');
 
-class Textile
+class Extension_TextPlusFormatter_Textile
 {
     var $hlgn;
     var $vlgn;
@@ -231,7 +231,7 @@ class Textile
     var $rev = '$Rev: 216 $';
 
 // -------------------------------------------------------------
-    function Textile()
+    function Extension_TextPlusFormatter_Textile()
     {
         $this->hlgn = "(?:\<(?!>)|(?<!<)\>|\<\>|\=|[()]+(?! ))";
         $this->vlgn = "[\-^~]";
@@ -307,33 +307,33 @@ class Textile
     }
 
 // -------------------------------------------------------------
-    function TextileRestricted($text, $lite=1, $noimage=1, $rel='nofollow')
+    function TextileInline($text, $lite='', $encode='', $noimage='', $strict='', $rel='')
     {
-        $this->restricted = true;
-        $this->lite = $lite;
-        $this->noimage = $noimage;
         if ($rel)
            $this->rel = ' rel="'.$rel.'" ';
+        $this->lite = $lite;
+        $this->noimage = $noimage;
 
-            // escape any raw html
-            $text = $this->encode_html($text, 0);
+        if ($encode) {
+         $text = $this->incomingEntities($text);
+            $text = str_replace("x%x%", "&#38;", $text);
+            return $text;
+        } else {
 
-            $text = $this->cleanWhiteSpace($text);
+            if(!$strict) {
+                $text = $this->cleanWhiteSpace($text);
+            }
+
             $text = $this->getRefs($text);
 
-            if ($lite) {
-                $text = $this->blockLite($text);
-            }
-            else {
-                $text = $this->block($text);
-            }
-
+            $text = $this->blockLite($text);
             $text = $this->retrieve($text);
 
                 // just to be tidy
             $text = str_replace("<br />", "<br />\n", $text);
 
             return $text;
+        }
     }
 
 // -------------------------------------------------------------
@@ -1125,7 +1125,7 @@ class Textile
 
     function blockLite($text)
     {
-        $this->btag = array('bq', 'p');
+        $this->btag = array();
         return $this->block($text."\n\n");
     }
 

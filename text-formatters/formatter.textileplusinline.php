@@ -1,6 +1,6 @@
 <?php
 	
-	class FormatterTextilePlus extends TextFormatter {
+	class FormatterTextilePlusInline extends TextFormatter {
 		const COL_CHARACTER = 0;
 		const COL_NAMED = 1;
 		const COL_DECIMAL = 2;
@@ -12,15 +12,15 @@
 		
 		public function about() {
 			return array(
-				'name'			=> 'Textile Plus',
+				'name'			=> 'Textile Plus Inline',
 				'version'		=> '1.0.1',
-				'release-date'	=> '2009-04-30',
+				'release-date'	=> '2009-05-11',
 				'author'		=> array(
 					'name'			=> 'Rowan Lewis',
 					'website'		=> 'http://pixelcarnage.com/',
 					'email'			=> 'rowan@pixelcarnage.com'
 				),
-				'description'	=> 'Format text using Textile with some extra features.'
+				'description'	=> 'Format text using Textile with some extra features, inline only.'
 			);
 		}
 		
@@ -122,7 +122,7 @@
 			);
 			
 			// Apply textile:
-			$textile = new Textile();
+			$textile = new Extension_TextPlusFormatter_Textile();
 			$source = $textile->TextileThis($source);
 			
 		    // Wrap quotation marks with a span:
@@ -156,15 +156,13 @@
 				'&#8230;', '<span class="ellipsis">&#8230;</span>', $source
 			);
 			
-			header('content-type: text/plain');
-			
 			$document = new DOMDocument('1.0', 'UTF-8');
 			$document->loadHTML($source);
 			$source = '';
 			
 			$xpath = new DOMXPath($document);
 			
-			foreach ($xpath->query('/html/body/*') as $child) {
+			foreach ($xpath->query('/html/body/p/node()') as $child) {
 				$source .= $document->saveXML($child);
 			}
 			

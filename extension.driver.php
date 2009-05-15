@@ -8,8 +8,8 @@
 		public function about() {
 			return array(
 				'name'			=> 'Formatter: Textile Plus',
-				'version'		=> '1.0.1',
-				'release-date'	=> '2009-04-30',
+				'version'		=> '1.0.2',
+				'release-date'	=> '2009-05-15',
 				'author'		=> array(
 					'name'			=> 'Rowan Lewis',
 					'website'		=> 'http://pixelcarnage.com/',
