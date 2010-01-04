@@ -93,6 +93,8 @@
 		
 		public function run($source) {
 			require_once(EXTENSIONS . '/textileplusformatter/lib/lib.textile.php');
+
+			if(strlen($source) <= 0) return;
 			
 			// Repair/sanitize entities:
 			$source = $this->entities($source);
@@ -154,8 +156,8 @@
 			// Wrap ellipsis with a span:
 			$source = str_replace(
 				'&#8230;', '<span class="ellipsis">&#8230;</span>', $source
-			);
-			
+			);			
+
 			$document = new DOMDocument('1.0', 'UTF-8');
 			$document->loadHTML($source);
 			$source = '';
