@@ -4,9 +4,9 @@ Formatter: Textile Plus
 The "Textile Plus" formatter combines Textile with some custom processing to
 prevent widowed words and wrap text features for styling with CSS.
 
-Version: 1.0.2
-Author: Rowan Lewis <rowan@pixelcarnage.com>
-Build Date: 15 May 2009
+Version: 1.0.3
+Author: Rowan Lewis <me@rowanlewis.com>
+Build Date: 7 January 2010
 Requirements: Symphony 2
 
 
