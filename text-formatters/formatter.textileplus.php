@@ -112,7 +112,7 @@
 			);
 			
 			// Prevent widows by inserting non breaking spaces:
-			$source = preg_replace(
+			$xsource = preg_replace(
 				'/([^ ])[ ]+(((<(a|span|i|b|em|strong|acronym|caps|sub|sup|abbr|big|small|code|cite|tt)[^>]*>)*[ ]*[^ <>]+)(<\/(a|span|i|b|em|strong|acronym|caps|sub|sup|abbr|big|small|code|cite|tt)>)*[^ <>]*[ ]*(<\/(p|h[1-6]|li)>|$))/i',
 				'\\1&#160;\\2', $source
 			);
